@@ -36,7 +36,7 @@ OJP
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">Post Jobs</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -194,56 +194,7 @@ OJP
 
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title"> Posted Jobs</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <th>
-                        Job Title
-                      </th>
-                      <th>
-                        Salary
-                      </th>
-                      <th>
-                        Working Hours
-                      </th>
-                      <th>
-                        Required Experiance(in years)
-                      </th>
-                      <th>
-                        Actions
-                      </th>
-                    </thead>
-                    <tbody>
-                      {% for i in postedjobs %}
-                        <tr>
-                          <td>{{ i.job_title }}</td>
-                          <td>{{ i.salary }}0 /-</td>
-                          <td>{{ i.work_hours }}</td>
-                          <td>{{ i.required_experiance }}</td>
-                          <td>
-                            <div class="content">
-                              <div class="row">
-                                <div class="col-md-6"><a href="{% url 'ojp:jppjedit' i.id %}" class="btn btn-primary btn-block">Edit</a> </div>
-                                <div class="col-md-6"><a href="{% url 'ojp:jpdelete' i.id %}" class="btn btn-primary btn-block">Delete</a></div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
 
     </div>

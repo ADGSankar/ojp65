@@ -178,6 +178,23 @@ class JobProvidersProfile(LoginRequiredMixin,View):
 
         return redirect("ojp:jpprofile", request.user.username)
 
+class JobProvidersViewPostedJobs(LoginRequiredMixin,View):
+    login_url = '/jplogin/'
+    redirect_field_name = 'redirect_to'
+
+    def get(self, request):
+
+        if (request.user.is_authenticated) and (not request.user.is_jp):
+            return redirect('ojp:jshome')
+
+        else:
+            cd = JPDetails.objects.filter(jp=request.user)
+            pj = JPPostJobs.objects.filter(jp=request.user)
+            return render(request,
+                          template_name=r"web/jp/jpvpj.html",
+                          context={ 'req': request, 'cd': cd[0],'postedjobs':pj}
+                          )
+
 
 class JobProvidersPostJobs(LoginRequiredMixin,View):
     login_url = '/jplogin/'
@@ -190,10 +207,9 @@ class JobProvidersPostJobs(LoginRequiredMixin,View):
         else:
             cd = JPDetails.objects.filter(jp=request.user)
             form=PostJobs
-            pj=JPPostJobs.objects.filter(jp=request.user)
             return render(request,
                 template_name=r"web/jp/jppj.html",
-                context={'form':form,'postedjobs':pj,'req':request,'cd':cd[0]}
+                context={'form':form,'req':request,'cd':cd[0]}
             )
     def post(self, request, *args, **kwargs):
         pj=JPPostJobs()
@@ -209,7 +225,7 @@ class JobProvidersPostJobs(LoginRequiredMixin,View):
         pj.qualifications=request.POST["qualifications"]
         pj.note=request.POST["note"]
         pj.save()
-        return redirect('ojp:jppj')
+        return redirect('ojp:jpvpj')
 
 class JobProvidersPostJobsEdit(LoginRequiredMixin,View):
     login_url = '/jplogin/'
@@ -230,11 +246,11 @@ class JobProvidersPostJobsEdit(LoginRequiredMixin,View):
 
     def post(self, request, *args, **kwargs):
         JPPostJobs.objects.filter(id=kwargs['pk']).update(job_title=request.POST["job_title"],salary=request.POST["salary"],work_hours=request.POST["work_hours"],required_experiance=request.POST["required_experiance"],qualifications=request.POST["qualifications"],note=request.POST["note"])
-        return redirect('ojp:jppj')
+        return redirect('ojp:jpvpj')
 
 def JobDelete(request,pk):
     JPPostJobs.objects.filter(id=pk).delete()
-    return redirect("ojp:jppj")
+    return redirect("ojp:jpvpj")
 
 class JSAccept(LoginRequiredMixin,View):
     login_url = '/jplogin/'

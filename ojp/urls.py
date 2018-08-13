@@ -46,6 +46,7 @@ urlpatterns = [
     path('jobproviderhome/', JobProvidersHome.as_view(), name='jphome'),
     path('jobproviderprofile/<slug:pk>/', JobProvidersProfile.as_view(), name='jpprofile'),
     path('jobproviderprofileedit/', JobProvidersledit.as_view(), name='jpledit'),
+    path('jobproviderviewpostedjobs/', JobProvidersViewPostedJobs.as_view(), name='jpvpj'),
     path('jobproviderpostjobs/', JobProvidersPostJobs.as_view(), name='jppj'),
     path('jobproviderdetails/', JobProvidersDetails.as_view(), name='jpdetails'),
     path('jobproviderpostjobs/<int:pk>/',JobProvidersPostJobsEdit.as_view(),name='jppjedit'),
